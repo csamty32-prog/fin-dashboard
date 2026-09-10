@@ -1,10 +1,1 @@
-{
-  "name":"Fin Dashboard",
-  "short_name":"FinDash",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#07101d",
-  "theme_color":"#0b1220",
-  "description":"Dashboard financiero móvil con watchlist de hasta 100 tickers.",
-  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
-}
+{"name":"Fin Dashboard V3","short_name":"FinDash","start_url":"./","display":"standalone","background_color":"#07101d","theme_color":"#0b1220","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}

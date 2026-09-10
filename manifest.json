@@ -1,0 +1,19 @@
+{
+  "name": "Fin Dashboard",
+  "short_name": "FinDash",
+  "description": "Dashboard financiero móvil para SOXL, FNGS y otros tickers.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#111827",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Fin Dashboard</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.app{max-width:520px;margin:auto;min-height:100vh;background:#f8fafc;padding-bottom:82px}
+header{background:#111827;color:white;padding:18px 18px 16px;position:sticky;top:0;z-index:5}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{font-size:20px;font-weight:800}.pill{background:#1f2937;border-radius:999px;padding:7px 10px;font-size:12px}
+select{width:100%;margin-top:14px;background:#1f2937;color:white;border:1px solid #374151;border-radius:12px;padding:11px;font-size:15px}
+main{padding:16px}.price{font-size:34px;font-weight:850}.muted{color:#6b7280;font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.card{background:white;border:1px solid #e5e7eb;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.kpi{font-size:21px;font-weight:800;margin-top:5px}.green{color:#15803d}.yellow{color:#a16207}.red{color:#b91c1c}
+.section{font-size:16px;font-weight:800;margin:20px 0 10px}.bar{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin-top:8px}.fill{height:100%;width:68%;background:#111827}
+.chart{height:150px;display:flex;align-items:end;gap:9px;padding:12px 4px 2px}.barc{flex:1;background:#111827;border-radius:6px 6px 2px 2px;min-height:22px}.year{font-size:10px;color:#6b7280;text-align:center}
+.targets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.target{padding:12px 8px;border-radius:12px;background:#f3f4f6;text-align:center}.target b{display:block;font-size:18px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:auto;background:white;border-top:1px solid #e5e7eb;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:10}
+nav button{border:0;background:none;color:#6b7280;font-size:11px;padding:7px 2px}.active{color:#111827!important;font-weight:800}
+.view{display:none}.view.on{display:block}
+.note{font-size:12px;color:#6b7280;line-height:1.4}.badge{display:inline-block;border-radius:999px;padding:5px 9px;background:#dcfce7;color:#166534;font-weight:700;font-size:12px}
+</style>
+<link rel="manifest" href="manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" href="icon.svg"></head>
+<body>
+<div class="app">
+<header>
+  <div class="top"><div class="brand">Fin Dashboard</div><div class="pill">Móvil</div></div>
+  <select id="ticker">
+    <option value="SOXL">SOXL</option><option value="FNGS">FNGS</option>
+  </select>
+</header>
+
+<main>
+<section id="home" class="view on">
+  <div class="card">
+    <div class="muted">Ticker seleccionado</div>
+    <div class="price" id="sym">SOXL</div>
+    <span class="badge">Panel listo para datos</span>
+    <div class="grid">
+      <div><div class="muted">Precio</div><div class="kpi">—</div></div>
+      <div><div class="muted">Tendencia</div><div class="kpi">—</div></div>
+      <div><div class="muted">Riesgo</div><div class="kpi yellow">—</div></div>
+      <div><div class="muted">Target</div><div class="kpi" id="target">$160</div></div>
+    </div>
+    <div class="muted">Semáforo general</div><div class="bar"><div class="fill"></div></div>
+    <p class="note">Los campos de mercado se dejan en blanco hasta conectar una fuente de datos en vivo; así no se inventan cotizaciones.</p>
+  </div>
+  <div class="section">Resumen rápido</div>
+  <div class="grid">
+    <div class="card"><div class="muted">Ventas YoY</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">ROE</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Margen neto</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">P/E</div><div class="kpi">—</div></div>
+  </div>
+</section>
+
+<section id="fund" class="view">
+  <div class="section">Fundamentales</div>
+  <div class="card"><div class="muted">Ventas anuales</div><div class="chart">
+    <div style="flex:1"><div class="barc" style="height:55%"></div><div class="year">A-3</div></div>
+    <div style="flex:1"><div class="barc" style="height:67%"></div><div class="year">A-2</div></div>
+    <div style="flex:1"><div class="barc" style="height:78%"></div><div class="year">A-1</div></div>
+    <div style="flex:1"><div class="barc" style="height:92%"></div><div class="year">Último</div></div>
+  </div></div>
+  <div class="grid">
+    <div class="card"><div class="muted">EPS</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">ROE</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Margen bruto</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Margen operativo</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Deuda</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Flujo de efectivo</div><div class="kpi">—</div></div>
+  </div>
+</section>
+
+<section id="valuation" class="view">
+  <div class="section">Valuación</div>
+  <div class="grid">
+    <div class="card"><div class="muted">P/E</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Forward P/E</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">PEG</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">P/S</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">EV/EBITDA</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Vs. histórico</div><div class="kpi yellow">—</div></div>
+  </div>
+</section>
+
+<section id="trade" class="view">
+  <div class="section">Trading</div>
+  <div class="card">
+    <div class="muted">Niveles configurados</div>
+    <div class="targets">
+      <div class="target">Entrada<b>—</b></div>
+      <div class="target">TP 1<b>—</b></div>
+      <div class="target">TP 2<b>—</b></div>
+      <div class="target">TP 3<b>—</b></div>
+      <div class="target">Target<b id="tradeTarget">$160</b></div>
+      <div class="target">Stop<b>—</b></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:10px"><div class="muted">Riesgo / beneficio</div><div class="kpi">—</div></div>
+</section>
+
+<section id="risk" class="view">
+  <div class="section">Riesgo</div>
+  <div class="grid">
+    <div class="card"><div class="muted">Volatilidad</div><div class="kpi yellow">—</div></div>
+    <div class="card"><div class="muted">Drawdown</div><div class="kpi">—</div></div>
+    <div class="card"><div class="muted">Mercado</div><div class="kpi yellow">—</div></div>
+    <div class="card"><div class="muted">Fundamental</div><div class="kpi yellow">—</div></div>
+  </div>
+  <div class="card"><b>Semáforo final</b><div class="kpi yellow">PENDIENTE DE DATOS</div></div>
+</section>
+</main>
+
+<nav>
+<button class="active" data-v="home">🏠<br>Inicio</button>
+<button data-v="fund">📊<br>Fund.</button>
+<button data-v="valuation">💰<br>Valuación</button>
+<button data-v="trade">🎯<br>Trading</button>
+<button data-v="risk">⚠️<br>Riesgo</button>
+</nav>
+</div>
+<script>
+const views=document.querySelectorAll('.view'), btns=document.querySelectorAll('nav button');
+btns.forEach(b=>b.onclick=()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');views.forEach(v=>v.classList.toggle('on',v.id===b.dataset.v));scrollTo(0,0)});
+document.getElementById('ticker').onchange=e=>{
+ const s=e.target.value; document.getElementById('sym').textContent=s;
+ const t=s==='SOXL'?'$160':'—'; document.getElementById('target').textContent=t;document.getElementById('tradeTarget').textContent=t;
+};
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script></body>
+</html>
